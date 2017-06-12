@@ -1,6 +1,6 @@
 require "json"
 
-class GitInterface
+module GitInterface
 
   def status
     x = `git status`
@@ -14,8 +14,12 @@ class GitInterface
     x.to_json
   end
 
+  def added?(file = ".")
+    git add #{file}`
+  end
+
   def commit(message)
-    puts `git commit -m #{message}`
+    `git commit -m "#{message}" `.include? "nothing to commit"
   end
 
   def checkout(ramo)
